@@ -208,7 +208,7 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
 
 int main()
 {
-    int n = 7;
+    int n = 2;
 
     std::vector<Celica> polje;
     GenerirajPolje(n, polje);

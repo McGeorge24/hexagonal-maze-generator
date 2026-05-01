@@ -64,7 +64,7 @@ void Stena(int p, int q, int stranica, std::ostream &maze)
     }
 
     maze << "<line x1=\"" << x1 << "\" x2=\"" << x2 << "\" y1=\"" << y1 << "\" y2=\"" << y2 << "\" ";
-    maze << "stroke=\"black\" stroke-width=\"2\"/>";
+    maze << "stroke=\"black\" stroke-width=\"5\" stroke-linecap=\"round\"/>";
 }
 
 struct Prehod
@@ -208,7 +208,7 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
 
 int main()
 {
-    int n = 3;
+    int n = 7;
 
     std::vector<Celica> polje;
     GenerirajPolje(n, polje);
@@ -235,8 +235,12 @@ int main()
             continue;
         for (int j = 0; j < 6; j++)
         {
-            if (polje[i].prehodi[j].odprt == false)
+            if ((polje[i].prehodi[j].odprt == false) && (polje[i].prehodi[j].obdelan == false))
+            {
                 Stena(polje[i].x, polje[i].y, j, maze_svg);
+                polje[i].prehodi[j].obdelan = true;
+                polje[polje[i].prehodi[j].vodi_do].prehodi[(3 + j) % 6].obdelan = true;
+            }
         }
     }
 

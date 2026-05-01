@@ -196,11 +196,11 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
         smer = rand() % 6;
         raziskane_poti.insert(smer);
         nov_zacetek = polje[zacetek].prehodi[smer].vodi_do;
-        std::cout << "\tsmer: " << smer << std::endl;
-        std::cout << "\tvodi do: " << nov_zacetek << std::endl;
-        std::cout << "\t\trob=" << polje[nov_zacetek].rob << ", explored=" << polje[nov_zacetek].explored << std::endl;
         if ((polje[nov_zacetek].rob == false) && (polje[nov_zacetek].explored == false))
         {
+            std::cout << "\tsmer: " << smer << std::endl;
+            std::cout << "\tvodi do: " << nov_zacetek << std::endl;
+            std::cout << "\t\trob=" << polje[nov_zacetek].rob << ", explored=" << polje[nov_zacetek].explored << std::endl;
             polje[zacetek].prehodi[smer].odprt = true;
             polje[nov_zacetek].explored = true;
             polje[nov_zacetek].prehodi[(3 + smer) % 6].odprt = true;
@@ -209,11 +209,12 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
             GenerirajLabirint(nov_zacetek, polje);
         }
     }
+    std::cout << "konec celice " << zacetek << std::endl;
 }
 
 int main()
 {
-    int n = 10;
+    int n = 3;
 
     std::vector<Celica> polje;
     GenerirajPolje(n, polje);
@@ -229,10 +230,10 @@ int main()
     maze_svg << "<rect width=\"100%\" height=\"100%\" fill=\"white\"/>";
     // maze_svg << "<circle cx=\"" << width / 2 << "\" cy=\"" << height / 2 << "\" r=\"" << r << "\" fill=\"white\"/>";
 
-    srand(time(0));
-    polje[n + 1].explored = true;
-    polje[n + 1].prehodi[0].odprt = true;
-    polje[polje.size() - n - 1].prehodi[4].odprt = true;
+    srand(0);
+    polje[n + 2].explored = true;
+    // polje[n + 1].prehodi[0].odprt = true;
+    // polje[polje.size() - n - 2].prehodi[4].odprt = true;
     GenerirajLabirint(n + 2, polje);
     for (int i = 0; i < polje.size(); i++)
     {

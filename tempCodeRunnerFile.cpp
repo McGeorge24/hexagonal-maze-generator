@@ -1,1 +1,0 @@
-najdeno_polje = true;

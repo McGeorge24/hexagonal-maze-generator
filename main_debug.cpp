@@ -223,7 +223,7 @@ int main()
     int height = 100 + (2 * n - 1) * A * 3 + A;
     // int r = 25 + (2 * n - 1) * B;
 
-    std::ofstream maze_svg("maze.svg", std::fstream::trunc);
+    std::ofstream maze_svg("example_maze.svg", std::fstream::trunc);
     // specifikacije SVG slike
     maze_svg << "<svg version=\"1.1\" width=\"" << width << "\" height=\"" << height << "\" xmlns=\"http://www.w3.org/2000/svg\">";
     // ozadje

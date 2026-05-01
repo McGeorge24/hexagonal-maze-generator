@@ -1,11 +1,11 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <set>
+#include <iostream> // za debug
+#include <fstream>  //za pisanje v .svg file
+#include <vector>   //za graf
+#include <cstdlib>  //za rand()
+#include <ctime>    //za seme za rand()
+#include <set>      //za algoritem (preveri vse smeri ene celice)
 
-#define A 15
+#define A 15 // približek pitagorejski trojici za trikotnik 30-60-90, da nerabm uporabit decimalk
 #define B 26
 #define C 30
 

@@ -15,10 +15,10 @@ Idejo za projekt sem dobil iz dveh Youtube videov
 - prestrukturiranje kode
 - označevanje začetka in konca
 - naredi se tudi rešitev labirinta
+- možnost uporabe programa v CLI
 
 ## Preostali cilji
 - možnost labirinta v obliki PNG
-- možnost uporabe programa v CLI
 
 ## Problemi
 - uporabljen algoritem je DFS, implementiran z rekurzijo, zato se program sesuje če je n > 100. Gemini mi je predlagal, da sam uporabim stack na katerega nalagam celice, ki jih moram obdelat in se ne zanašam na call stack, ki ga hitreje zmanjka.

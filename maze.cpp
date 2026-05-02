@@ -78,8 +78,9 @@ void Maze::NarisiLabirint(std::string filename, bool narisi_resitev)
     if (narisi_resitev)
     {
         maze_svg << "<polyline points=\"";
+        maze_svg << std::format("{},{} ", polje[polje.size() - n - 3].polozaj.x, polje[polje.size() - n - 3].polozaj.y);
         DorisiResitev(polje.size() - n - 3);
-        maze_svg << "\" fill=\"none\" stroke=\"blue\" stroke-width=\"5\" />\n";
+        maze_svg << "\" fill=\"none\" stroke=\"blue\" stroke-width=\"5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" />\n";
     }
 
     maze_svg << "</svg>";

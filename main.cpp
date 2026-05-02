@@ -190,6 +190,7 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
     int nov_zacetek;
     bool najdeno_polje = false;
     std::set<int> raziskane_poti;
+
     while (raziskane_poti.size() < 6)
     {
         smer = rand() % 6;
@@ -208,7 +209,7 @@ void GenerirajLabirint(int zacetek, std::vector<Celica> &polje)
 
 int main()
 {
-    int n = 2;
+    int n = 9;
 
     std::vector<Celica> polje;
     GenerirajPolje(n, polje);

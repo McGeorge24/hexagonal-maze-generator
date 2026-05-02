@@ -25,4 +25,4 @@ Idejo za projekt sem dobil iz dveh Youtube videov
 
 ## Predlagane izboljšave
 ### Boljša implementacija grafa/drevesa
-Trenutno imam zelo kompleksno funkcijo, ki celoten graf z vsemi povezavami shrani v eno-dimenzionalni vector. Morda, bi bilo bolje, da uporabim map, kjer je ključ 'std::pair<vrstica, polozaj_v_vrstici>'. Gemini predlaga 3d koordinatni sistem (kjer ima vsaka točka 6 sosedov (2 v vsaki od dimenzij)), ali pa nek q in r.
+Trenutno imam zelo kompleksno funkcijo, ki celoten graf z vsemi povezavami shrani v eno-dimenzionalni vector. Morda, bi bilo bolje, da uporabim map, kjer je ključ `std::pair<vrstica, polozaj_v_vrstici>`. Gemini predlaga 3d koordinatni sistem (kjer ima vsaka točka 6 sosedov (2 v vsaki od dimenzij)), ali pa nek q in r.

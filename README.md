@@ -12,11 +12,11 @@ Idejo za projekt sem dobil iz dveh youtube videov
 - funkcija, ki naredi 6-kotno polje z velikostjo stranice N
 - funkcija, ki naredi skozi to polje natanko 1 naključno pot
 - funkcija, ki robove celic polja nariše
+- prestrukturiranje kode
 
 ## Preostali cilji
 - možnost labirinta v obliki PNG
 - možnost uporabe programa v CLI
-- prestrukturiranje kode
 - označevanje začetka in konca
 
 ## Problemi

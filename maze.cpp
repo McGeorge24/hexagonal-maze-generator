@@ -78,8 +78,8 @@ void Maze::NarisiLabirint(std::string filename, bool narisi_resitev)
     if (narisi_resitev)
     {
         maze_svg << "<polyline points=\"";
-        maze_svg << std::format("{},{} ", polje[polje.size() - n - 3].polozaj.x, polje[polje.size() - n - 3].polozaj.y);
-        DorisiResitev(polje.size() - n - 3);
+        maze_svg << std::format("{},{} ", polje[n + 2].polozaj.x, polje[n + 2].polozaj.y);
+        DorisiResitev(n + 2);
         maze_svg << "\" fill=\"none\" stroke=\"blue\" stroke-width=\"5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" />\n";
     }
 
@@ -254,8 +254,8 @@ void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri, int glo
 void Maze::GenerirajLabirint()
 {
     srand(seme);
-    GenerirajLabirintRekurzivno(n + 2, 0, 0);
-    polje[n + 2].prehodi[0].odprt = false;
+    GenerirajLabirintRekurzivno(polje.size() - n - 3, 4, 0);
+    polje[polje.size() - n - 3].prehodi[4].odprt = false;
 }
 
 Maze::Maze(int p_n, int seed)

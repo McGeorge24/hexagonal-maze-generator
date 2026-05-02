@@ -265,14 +265,38 @@ Maze::Maze(int p_n, int seed)
     GenerirajPolje();
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    int n = 7;
-    int seme = time(0);
+    if (argc < 4)
+    {
+        std::cout << "Too litle arguments." << std::endl;
+        std::cout << "maze <n> <seed> <filename without extension>" << std::endl;
+    }
+    int n;
+    try
+    {
+        n = std::stoi(argv[1]);
+    }
+    catch (std::invalid_argument const &ex)
+    {
+        std::cout << argv[1] << " is not a valid integer";
+        exit(0);
+    }
+    int seme;
+    try
+    {
+        seme = std::stoi(argv[2]);
+    }
+    catch (std::invalid_argument const &ex)
+    {
+        std::cout << argv[2] << " is not a valid integer";
+        exit(0);
+    }
+
     // polje[polje.size() - n - 3].prehodi[3].odprt = true;
     Maze labirint(n, seme);
     labirint.GenerirajLabirint();
-    labirint.ExportSVG("example_maze");
+    labirint.ExportSVG(argv[3]);
 
     return 0;
 }

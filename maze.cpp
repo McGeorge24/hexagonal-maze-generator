@@ -65,14 +65,16 @@ void Maze::NarisiLabirint(std::string filename)
 
     for (int i = 0; i < polje.size(); i++)
     {
-        NarisiCelico(polje[i]);
+        if (polje[i].rob == false)
+            NarisiCelico(polje[i]);
     }
 
     maze_svg << "</svg>";
     maze_svg.close();
 }
 
-void Maze::ExportSVG(std::string filename) {
+void Maze::ExportSVG(std::string filename)
+{
     NarisiLabirint(filename);
 }
 
@@ -171,6 +173,8 @@ void Maze::GenerirajPolje()
         vrstica += delta;
         w += delta;
     }
+
+    n -= 1;
 }
 
 void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri)
@@ -194,12 +198,14 @@ void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri)
     }
 }
 
-void Maze::GenerirajLabirint() {
+void Maze::GenerirajLabirint()
+{
     srand(seme);
     GenerirajLabirintRekurzivno(n + 2, 0);
 }
 
-Maze::Maze(int p_n, int seed) {
+Maze::Maze(int p_n, int seed)
+{
     n = p_n;
     seme = seed;
     GenerirajPolje();
@@ -209,7 +215,7 @@ int main()
 {
     int n = 9;
     int seme = time(0);
-    //polje[polje.size() - n - 3].prehodi[3].odprt = true;
+    // polje[polje.size() - n - 3].prehodi[3].odprt = true;
     Maze labirint(n, seme);
     labirint.GenerirajLabirint();
     labirint.ExportSVG("nov_labirint.svg");

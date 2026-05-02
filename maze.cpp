@@ -63,10 +63,17 @@ void Maze::NarisiLabirint(std::string filename)
     // ozadje
     maze_svg << "<rect width=\"100%\" height=\"100%\" fill=\"white\"/>\n";
 
+    // zacetek in konec
+    maze_svg << PobarvajCelico(polje[n + 2].polozaj, "green");
+    maze_svg << PobarvajCelico(polje[polje.size() - n - 3].polozaj, "red");
+
     for (int i = 0; i < polje.size(); i++)
     {
         if (polje[i].rob == false)
+        {
             NarisiCelico(polje[i]);
+            DopisiGlobino(polje[i]);
+        }
     }
 
     maze_svg << "</svg>";
@@ -76,6 +83,24 @@ void Maze::NarisiLabirint(std::string filename)
 void Maze::ExportSVG(std::string filename)
 {
     NarisiLabirint(filename);
+}
+
+std::string Maze::PobarvajCelico(vec2 &polozaj_celice, std::string barva)
+{
+    vec2 ogljisca[6];
+    for (int i = 0; i < 6; i++)
+    {
+        ogljisca[i] = PolozajOgljisca(polozaj_celice, i);
+    }
+    return std::format("<polygon points=\"{},{} {},{} {},{} {},{} {},{} {},{}\" fill=\"{}\"/>",
+                       ogljisca[0].x, ogljisca[0].y, ogljisca[1].x, ogljisca[1].y, ogljisca[2].x, ogljisca[2].y,
+                       ogljisca[3].x, ogljisca[3].y, ogljisca[4].x, ogljisca[4].y, ogljisca[5].x, ogljisca[5].y, barva);
+}
+
+void Maze::DopisiGlobino(Celica &celica)
+{
+    maze_svg << std::format("<text x=\"{}\" y=\"{}\">{}</text>\n",
+                            celica.polozaj.x, celica.polozaj.y, celica.globina);
 }
 
 void Maze::GenerirajPolje()
@@ -109,6 +134,7 @@ void Maze::GenerirajPolje()
 
     Celica temp_celica;
     temp_celica.explored = false;
+    temp_celica.globina = -1;
     Prehod temp_prehod;
     temp_prehod.obdelan = false;
     temp_prehod.odprt = false;
@@ -122,7 +148,6 @@ void Maze::GenerirajPolje()
         prva_sledi = k + vrstica;
         for (j = 0; j < vrstica; j++)
         {
-            temp_celica.id = k;
             temp_celica.polozaj.x = x + j * 2 * B;
             temp_celica.polozaj.y = y;
 
@@ -177,13 +202,14 @@ void Maze::GenerirajPolje()
     n -= 1;
 }
 
-void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri)
+void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri, int globina)
 {
     int smer;
     int nov_zacetek;
     std::set<int> raziskane_poti;
     polje[zacetek].explored = true;
     polje[zacetek].prehodi[prisel_iz_smeri].odprt = true;
+    polje[zacetek].globina = globina;
 
     while (raziskane_poti.size() < 6)
     {
@@ -193,7 +219,7 @@ void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri)
         if ((polje[nov_zacetek].rob == false) && (polje[nov_zacetek].explored == false))
         {
             polje[zacetek].prehodi[smer].odprt = true;
-            GenerirajLabirintRekurzivno(nov_zacetek, (3 + smer) % 6);
+            GenerirajLabirintRekurzivno(nov_zacetek, (3 + smer) % 6, globina + 1);
         }
     }
 }
@@ -201,7 +227,8 @@ void Maze::GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri)
 void Maze::GenerirajLabirint()
 {
     srand(seme);
-    GenerirajLabirintRekurzivno(n + 2, 0);
+    GenerirajLabirintRekurzivno(n + 2, 0, 0);
+    polje[n + 2].prehodi[0].odprt = false;
 }
 
 Maze::Maze(int p_n, int seed)
@@ -218,7 +245,7 @@ int main()
     // polje[polje.size() - n - 3].prehodi[3].odprt = true;
     Maze labirint(n, seme);
     labirint.GenerirajLabirint();
-    labirint.ExportSVG("nov_labirint.svg");
+    labirint.ExportSVG("example_maze.svg");
 
     return 0;
 }

@@ -6,6 +6,7 @@
 #include <ctime>    //za seme za rand()
 #include <set>      //za algoritem (preveri vse smeri ene celice)
 #include <string>
+#include <format>
 
 // približek pitagorejski trojici za trikotnik 30-60-90, da nerabm uporabit decimalk
 #define A 15
@@ -26,14 +27,12 @@ struct vec2
 
 struct Celica
 {
-    int id;
+    int globina;
     vec2 polozaj;
     bool explored;
     bool rob;
     Prehod prehodi[6];
 };
-
-
 
 class Maze
 {
@@ -57,6 +56,9 @@ private:
     std::pair<vec2, vec2> PolozajRoba(vec2 &polozaj_celice, int id_roba);
     vec2 PolozajOgljisca(vec2 &polozaj_celice, int id_ogljisca);
 
+    std::string PobarvajCelico(vec2 &polozaj_celice, std::string barva);
+    void DopisiGlobino(Celica &celica);
+
     void GenerirajPolje();
-    void GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri);
+    void GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri, int globina);
 };

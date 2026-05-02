@@ -48,7 +48,7 @@ void Maze::NarisiCelico(Celica &celica)
     }
 }
 
-void Maze::NarisiLabirint(std::string filename)
+void Maze::NarisiLabirint(std::string filename, bool narisi_resitev)
 {
     int width = 100 + (2 * n - 1) * B * 2;
     int height = 100 + (2 * n - 1) * A * 3 + A;
@@ -72,8 +72,14 @@ void Maze::NarisiLabirint(std::string filename)
         if (polje[i].rob == false)
         {
             NarisiCelico(polje[i]);
-            DopisiGlobino(polje[i]);
+            // DopisiGlobino(polje[i]);
         }
+    }
+    if (narisi_resitev)
+    {
+        maze_svg << "<polyline points=\"";
+        DorisiResitev(polje.size() - n - 3);
+        maze_svg << "\" fill=\"none\" stroke=\"blue\" stroke-width=\"5\" />\n";
     }
 
     maze_svg << "</svg>";
@@ -82,7 +88,8 @@ void Maze::NarisiLabirint(std::string filename)
 
 void Maze::ExportSVG(std::string filename)
 {
-    NarisiLabirint(filename);
+    NarisiLabirint(filename + ".svg", false);
+    NarisiLabirint(filename + "_solution.svg", true);
 }
 
 std::string Maze::PobarvajCelico(vec2 &polozaj_celice, std::string barva)
@@ -101,6 +108,25 @@ void Maze::DopisiGlobino(Celica &celica)
 {
     maze_svg << std::format("<text x=\"{}\" y=\"{}\">{}</text>\n",
                             celica.polozaj.x, celica.polozaj.y, celica.globina);
+}
+
+void Maze::DorisiResitev(int zacetek)
+{
+    int i;
+    int nov_zacetek;
+    while (polje[zacetek].globina > 0)
+    {
+        for (i = 0; i < 6; i++)
+        {
+            nov_zacetek = polje[zacetek].prehodi[i].vodi_do;
+            if ((polje[nov_zacetek].globina < polje[zacetek].globina) && (polje[nov_zacetek].globina != -1) && (polje[zacetek].prehodi[i].odprt == true))
+            {
+                zacetek = nov_zacetek;
+                maze_svg << std::format("{},{} ", polje[zacetek].polozaj.x, polje[zacetek].polozaj.y);
+                break;
+            }
+        }
+    }
 }
 
 void Maze::GenerirajPolje()
@@ -240,12 +266,12 @@ Maze::Maze(int p_n, int seed)
 
 int main()
 {
-    int n = 9;
+    int n = 7;
     int seme = time(0);
     // polje[polje.size() - n - 3].prehodi[3].odprt = true;
     Maze labirint(n, seme);
     labirint.GenerirajLabirint();
-    labirint.ExportSVG("example_maze.svg");
+    labirint.ExportSVG("example_maze");
 
     return 0;
 }

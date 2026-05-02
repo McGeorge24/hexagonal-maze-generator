@@ -50,7 +50,7 @@ private:
     int n;
     std::ofstream maze_svg;
 
-    void NarisiLabirint(std::string filename);
+    void NarisiLabirint(std::string filename, bool narisi_resitev);
     void NarisiCelico(Celica &celica);
     void NarisiRob(Celica &celica, int id_roba);
     std::pair<vec2, vec2> PolozajRoba(vec2 &polozaj_celice, int id_roba);
@@ -58,6 +58,8 @@ private:
 
     std::string PobarvajCelico(vec2 &polozaj_celice, std::string barva);
     void DopisiGlobino(Celica &celica);
+
+    void DorisiResitev(int zacetek);
 
     void GenerirajPolje();
     void GenerirajLabirintRekurzivno(int zacetek, int prisel_iz_smeri, int globina);

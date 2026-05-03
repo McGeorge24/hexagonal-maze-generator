@@ -7,13 +7,13 @@
 > n must ALWAYS be specified. n must be an integer.
 ```
 Tags:
--s      specifies seed, used to generate the maze, can be of type integer or string <br>
-        DEFAULT: random integer based on time <br>
--o      specifies name of the output file without extension <br>
-        DEFAULT: maze <br>
--f      specifies export format. Options: PNG, SVG <br>
-        DEFAULT: SVG <br>
--h      help <br>
+-s      specifies seed, used to generate the maze, can be of type integer or string
+        DEFAULT: random integer based on time
+-o      specifies name of the output file without extension
+        DEFAULT: maze
+-f      specifies export format. Options: PNG, SVG
+        DEFAULT: SVG
+-h      help
 ```
 ## Ideja
 Idejo za projekt sem dobil iz dveh Youtube videov

@@ -3,7 +3,7 @@
 
 `./maze <n> <tags> <arguments>`
 
-> [!IMPORTANT] <br>
+> [!IMPORTANT] 
 > n must ALWAYS be specified. n must be an integer.
 ```
 Tags:

@@ -10,38 +10,40 @@ Custom_CLI::Custom_CLI(int argc, char *argv[])
         std::cout << "Too many arguments\n";
         PrintHelp();
     }
-
-    HandleN(argv[1]);
-
-    seed = time(0);
-    filename = std::string("maze");
-
-    std::string tag;
-    for (int i = 2; i < argc; i += 2)
+    else
     {
-        tag = std::string(argv[i]);
-        if (tag == "-h")
-            PrintHelp();
-        else if (tag == "-s")
+        HandleN(argv[1]);
+
+        seed = time(0);
+        filename = std::string("maze");
+
+        std::string tag;
+        for (int i = 2; i < argc; i += 2)
         {
-            if (i + 1 < argc)
-                HandleSeed(argv[i + 1]);
-            else
-                TooLittleArguments();
-        }
-        else if (tag == "-o")
-        {
-            if (i + 1 < argc)
-                HandleFilename(argv[i + 1]);
-            else
-                TooLittleArguments();
-        }
-        else if (tag == "-f")
-        {
-            if (i + 1 < argc)
-                HandleFormat(argv[i + 1]);
-            else
-                TooLittleArguments();
+            tag = std::string(argv[i]);
+            if (tag == "-h")
+                PrintHelp();
+            else if (tag == "-s")
+            {
+                if (i + 1 < argc)
+                    HandleSeed(argv[i + 1]);
+                else
+                    TooLittleArguments();
+            }
+            else if (tag == "-o")
+            {
+                if (i + 1 < argc)
+                    HandleFilename(argv[i + 1]);
+                else
+                    TooLittleArguments();
+            }
+            else if (tag == "-f")
+            {
+                if (i + 1 < argc)
+                    HandleFormat(argv[i + 1]);
+                else
+                    TooLittleArguments();
+            }
         }
     }
 }

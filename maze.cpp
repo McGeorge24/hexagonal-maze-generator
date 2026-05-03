@@ -1,4 +1,5 @@
 #include "maze.h"
+#include "cli.h"
 
 /*
 | šestkotnik (vrednosti stranic): (v resnici je zarotirano za 30° v levo)
@@ -267,36 +268,13 @@ Maze::Maze(int p_n, int seed)
 
 int main(int argc, char *argv[])
 {
-    if (argc < 4)
+    Custom_CLI cli(argc, argv);
+    if (cli.is_valid)
     {
-        std::cout << "Too litle arguments." << std::endl;
-        std::cout << "maze <n> <seed> <filename without extension>" << std::endl;
+        Maze labirint(cli.n, cli.seed);
+        labirint.GenerirajLabirint();
+        labirint.ExportSVG(cli.filename);
     }
-    int n;
-    try
-    {
-        n = std::stoi(argv[1]);
-    }
-    catch (std::invalid_argument const &ex)
-    {
-        std::cout << argv[1] << " is not a valid integer";
-        exit(0);
-    }
-    int seme;
-    try
-    {
-        seme = std::stoi(argv[2]);
-    }
-    catch (std::invalid_argument const &ex)
-    {
-        std::cout << argv[2] << " is not a valid integer";
-        exit(0);
-    }
-
-    // polje[polje.size() - n - 3].prehodi[3].odprt = true;
-    Maze labirint(n, seme);
-    labirint.GenerirajLabirint();
-    labirint.ExportSVG(argv[3]);
 
     return 0;
 }
